@@ -31,19 +31,36 @@ public class Acteur {
     @Column(name = "url")
     private String url;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "acteur_film",
-            joinColumns = @JoinColumn(name = "id_acteur"),
-            inverseJoinColumns = @JoinColumn(name = "id_film"))
+
+    @ManyToMany(mappedBy = "acteurFilms", cascade = CascadeType.ALL)
     private Set<Film> films = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "acteur_role",
-            joinColumns = @JoinColumn(name = "id_acteur"),
-            inverseJoinColumns = @JoinColumn(name = "id_role"))
-    private Set<Role> roles = new HashSet<>();
+            joinColumns = @JoinColumn(name = "id_acteur", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_role", referencedColumnName = "id"))
+    private Set<Role> roles = new java.util.LinkedHashSet<>();
 
     public Acteur() {
+    }
+
+    public Acteur(String idImdb, String identity, Naissance naissance, String url, Set<Film> films, Set<Role> roles) {
+        this.idImdb = idImdb;
+        this.identity = identity;
+        this.naissance = naissance;
+        this.url = url;
+        this.films = films;
+        this.roles = roles;
+    }
+
+    public Acteur(long id, String idImdb, String identity, Naissance naissance, String url, Set<Film> films, Set<Role> roles) {
+        this.id = id;
+        this.idImdb = idImdb;
+        this.identity = identity;
+        this.naissance = naissance;
+        this.url = url;
+        this.films = films;
+        this.roles = roles;
     }
 
     public long getId() {
@@ -86,7 +103,6 @@ public class Acteur {
         this.naissance = naissance;
     }
 
-    @JsonProperty("film")
     public Set<Film> getFilms() {
         return films;
     }

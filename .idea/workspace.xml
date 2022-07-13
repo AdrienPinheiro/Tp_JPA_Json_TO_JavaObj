@@ -5,48 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac259b29-e3ac-4f1f-8615-93e99ccf7a65" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/BLLException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/manager/ActeurManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/manager/FilmManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/manager/GenreManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/manager/LieuTournageManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/manager/PaysManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/manager/RealisateurManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bll/manager/RoleManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bo/Acteur.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bo/Film.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bo/Genre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bo/LieuTournage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bo/Naissance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bo/Pays.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bo/Realisateur.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bo/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/DALException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/DAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/DAOFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/ActeurImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/FilmImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/GenreImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/LieuTournageImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/PaysImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/RealisateurImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/RoleImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dal/Settings.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/films.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestBLL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestBO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestJBDC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bll/json/JsonReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dal/dao/ActeurDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dal/dao/FilmDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dal/settings/TechnicalException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bll/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bll/manager/ActeurManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bll/manager/ActeurManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bll/manager/FilmManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bll/manager/FilmManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bll/manager/GenreManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bll/manager/RealisateurManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bll/manager/RealisateurManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bo/Acteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bo/Acteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bo/Film.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bo/Film.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bo/Genre.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bo/LieuTournage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bo/LieuTournage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bo/Naissance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bo/Naissance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bo/Pays.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bo/Pays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bo/Realisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bo/Realisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bo/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bo/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/dao/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/DAOFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/dao/DAOFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/Impl/ActeurImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/ActeurImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/Impl/FilmImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/FilmImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/Impl/GenreImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/Impl/LieuTournageImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/LieuTournageImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/Impl/PaysImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/PaysImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/Impl/RealisateurImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/RealisateurImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/Impl/RoleImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/Impl/RoleImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dal/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dal/settings/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/films.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/json/films.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,10 +45,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="testEmb" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
@@ -90,27 +84,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Workplace\IntelliJ\richard\traitement-data\src\main\resources\json" />
       <recent name="D:\Workplace\IntelliJ\richard\traitement-data\src\main\resources" />
       <recent name="D:\Workplace\IntelliJ\richard\traitement-data\src\main\java" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Json" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Json" />
       <module name="traitement-data" />
@@ -125,12 +124,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="bll.Test" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="traitement-data" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bll.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -140,7 +139,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Json" />
         <item itemvalue="Application.JsonTestMain" />
       </list>
@@ -154,7 +153,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1657609070631</updated>
-      <workItem from="1657609072134" duration="37611000" />
+      <workItem from="1657609072134" duration="38036000" />
+      <workItem from="1657701463056" duration="19960000" />
     </task>
     <servers />
   </component>
@@ -166,7 +166,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="testEmb" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

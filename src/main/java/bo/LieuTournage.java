@@ -33,6 +33,21 @@ public class LieuTournage {
     public LieuTournage() {
     }
 
+    public LieuTournage(String city, String department, String country, Set<Film> films) {
+        this.city = city;
+        this.department = department;
+        this.country = country;
+        this.films = films;
+    }
+
+    public LieuTournage(long id, String city, String department, String country, Set<Film> films) {
+        this.id = id;
+        this.city = city;
+        this.department = department;
+        this.country = country;
+        this.films = films;
+    }
+
     public long getId() {
         return id;
     }
@@ -65,7 +80,6 @@ public class LieuTournage {
         this.country = country;
     }
 
-    @JsonProperty("film")
     public Set<Film> getFilms() {
         return films;
     }

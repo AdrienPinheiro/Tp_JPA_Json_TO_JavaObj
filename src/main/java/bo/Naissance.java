@@ -14,6 +14,7 @@ public class Naissance {
     @Column(name = "placeOfBirth")
     private String placeOfBirth;
 
+
     public String getDateOfBirth() {
         return dateOfBirth;
     }

@@ -1,11 +1,10 @@
 package bll.manager;
 
 import bll.BLLException;
-import bo.Acteur;
 import bo.Realisateur;
 import dal.DALException;
-import dal.DAO;
-import dal.DAOFactory;
+import dal.dao.DAO;
+import dal.dao.DAOFactory;
 
 import java.util.List;
 

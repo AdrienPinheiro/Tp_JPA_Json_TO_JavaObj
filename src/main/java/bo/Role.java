@@ -18,13 +18,30 @@ public class Role {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
-    private Set<Film> films = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "film_role",
+            joinColumns = @JoinColumn(name = "id_role"),
+            inverseJoinColumns = @JoinColumn(name = "id_film"))
+    private Set<Film> filmsRole = new HashSet<>();
 
     @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     private Set<Acteur> acteurs = new HashSet<>();
 
     public Role() {
+    }
+
+    public Role(String name, Set<Film> filmsRole, Set<Acteur> acteurs) {
+        this.name = name;
+        this.filmsRole = filmsRole;
+        this.acteurs = acteurs;
+    }
+
+    public Role(long id, String name, Set<Film> filmsRole, Set<Acteur> acteurs) {
+        this.id = id;
+        this.name = name;
+        this.filmsRole = filmsRole;
+        this.acteurs = acteurs;
     }
 
     public long getId() {
@@ -44,12 +61,12 @@ public class Role {
     }
 
     @JsonProperty("film")
-    public Set<Film> getFilms() {
-        return films;
+    public Set<Film> getFilmsRole() {
+        return filmsRole;
     }
 
-    public void setFilms(Set<Film> films) {
-        this.films = films;
+    public void setFilmsRole(Set<Film> filmsRole) {
+        this.filmsRole = filmsRole;
     }
 
     public Set<Acteur> getActeurs() {
@@ -65,7 +82,7 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", films=" + films +
+                ", films=" + filmsRole +
                 ", acteurs=" + acteurs +
                 '}';
     }

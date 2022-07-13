@@ -1,25 +1,23 @@
 package dal.Impl;
 
+import bo.Acteur;
 import bo.Film;
 import dal.DALException;
-import dal.DAO;
-import dal.Settings;
+import dal.dao.DAO;
+import dal.dao.FilmDAO;
+import dal.settings.Settings;
 
-import javax.persistence.TypedQuery;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import java.util.List;
 
-public class FilmImpl implements DAO<Film> {
+public class FilmImpl implements FilmDAO {
+    EntityManager em = Settings.getProperty();
+
     @Override
     public void insert(Film data) throws DALException {
-        try{
-            Settings.getProperty().getTransaction().begin();
-            Settings.getProperty().persist(data);
-            Settings.getProperty().getTransaction().commit();
-        } catch (DALException e) {
-            throw new DALException("Erreur lors de l'insertion d'un film");
-        }
+        em.getTransaction().begin();
+        em.persist(data);
+        em.getTransaction().commit();
     }
 
     @Override
@@ -32,21 +30,27 @@ public class FilmImpl implements DAO<Film> {
 
     }
 
+    // getSingleResult() returns Acteur OU Exception (et pas null)
     @Override
     public Film selectById(long id) throws DALException {
+        List<Film> filmList = em.createQuery("SELECT f FROM Film f WHERE f.id=:id", Film.class).setParameter("id", id).getResultList();
+        if(!filmList.isEmpty()){
+            return filmList.get(0);
+        }
         return null;
     }
 
     @Override
     public List<Film> selectAll() throws DALException {
-        ResultSet rs;
-        List<Film> filmList = new ArrayList<>();
-        try{
-            TypedQuery<Film> selectAll = Settings.getProperty().createQuery("SELECT f FROM Film f", Film.class);
-            filmList = selectAll.getResultList();
-        } catch (DALException e){
-            throw new DALException("Problème lors de la récupération de la liste de film");
+        List<Film> filmList = em.createQuery("SELECT f FROM Film f", Film.class).getResultList();
+        if(!filmList.isEmpty()){
+            return filmList;
         }
-        return filmList;
+        return null;
+    }
+
+    @Override
+    public List<Acteur> getActeursFilms() throws DALException {
+        return null;
     }
 }

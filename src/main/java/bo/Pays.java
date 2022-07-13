@@ -26,6 +26,19 @@ public class Pays {
     public Pays() {
     }
 
+    public Pays(String name, String url, Set<Film> films) {
+        this.name = name;
+        this.url = url;
+        this.films = films;
+    }
+
+    public Pays(long id, String name, String url, Set<Film> films) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.films = films;
+    }
+
     public long getId() {
         return id;
     }
@@ -50,7 +63,6 @@ public class Pays {
         this.url = url;
     }
 
-    @JsonProperty("film")
     public Set<Film> getFilms() {
         return films;
     }

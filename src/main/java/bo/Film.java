@@ -38,35 +38,69 @@ public class Film {
     @Column(name = "release_year")
     private String releaseYear;
 
-    @JsonProperty("realisateurs")
-    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
-    private Set<Realisateur> realisateurs;
-
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "film_role",
-    joinColumns = @JoinColumn(name = "id_film"),
-    inverseJoinColumns = @JoinColumn(name = "id_role"))
+    @JoinTable(name = "film_realisateur",
+            joinColumns = @JoinColumn(name = "id_film"),
+            inverseJoinColumns = @JoinColumn(name = "id_realisateur"))
+    private Set<Realisateur> realisateurs = new HashSet<>();
+
+    @ManyToMany(mappedBy = "filmsRole", cascade = CascadeType.ALL)
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
-    private Set<Acteur> acteurs = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "film_acteur",
+            joinColumns = @JoinColumn(name = "id_film", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_acteur", referencedColumnName = "id"))
+    private Set<Acteur> acteurFilms = new HashSet<>();
 
     @ElementCollection(targetClass = String.class)
-    @CollectionTable(name = "film_genre", joinColumns = @JoinColumn(name = "film_id"))
+    @CollectionTable(name = "film_genre", joinColumns = @JoinColumn(name = "id_film"))
     private List<String> genres;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_pays")
+    @JsonProperty("pays")
     private Pays country;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_tournage")
+    @JsonProperty("lieuTournage")
     private LieuTournage filming_locations;
 
     public Film() {
     }
 
+    public Film(String id_imdb, String title, String url, String description, String langage, String releaseYear, Set<Realisateur> realisateurs, Set<Role> roles, Set<Acteur> acteurFilms, List<String> genres, Pays country, LieuTournage filming_locations) {
+        this.id_imdb = id_imdb;
+        this.title = title;
+        this.url = url;
+        this.description = description;
+        this.langage = langage;
+        this.releaseYear = releaseYear;
+        this.realisateurs = realisateurs;
+        this.roles = roles;
+        this.acteurFilms = acteurFilms;
+        this.genres = genres;
+        this.country = country;
+        this.filming_locations = filming_locations;
+    }
 
+    public Film(long id, String id_imdb, String title, String url, String description, String langage, String releaseYear, Set<Realisateur> realisateurs, Set<Role> roles, Set<Acteur> acteurFilms, List<String> genres, Pays country, LieuTournage filming_locations) {
+        this.id = id;
+        this.id_imdb = id_imdb;
+        this.title = title;
+        this.url = url;
+        this.description = description;
+        this.langage = langage;
+        this.releaseYear = releaseYear;
+        this.realisateurs = realisateurs;
+        this.roles = roles;
+        this.acteurFilms = acteurFilms;
+        this.genres = genres;
+        this.country = country;
+        this.filming_locations = filming_locations;
+    }
 
     public long getId() {
         return id;
@@ -133,7 +167,6 @@ public class Film {
         this.realisateurs = realisateurs;
     }
 
-    @JsonProperty("genres")
     public List<String> getGenres() {
         return genres;
     }
@@ -160,7 +193,6 @@ public class Film {
         this.filming_locations = filming_locations;
     }
 
-    @JsonProperty("roles")
     public Set<Role> getRoles() {
         return roles;
     }
@@ -169,13 +201,16 @@ public class Film {
         this.roles = roles;
     }
 
-    public Set<Acteur> getActeurs() {
-        return acteurs;
+    @JsonProperty("acteurs")
+    public Set<Acteur> getActeurFilms() {
+        return acteurFilms;
     }
 
-    public void setActeurs(Set<Acteur> acteurs) {
-        this.acteurs = acteurs;
+    public void setActeurFilms(Set<Acteur> acteurFilms) {
+        this.acteurFilms = acteurFilms;
     }
+
+
 
     @Override
     public String toString() {
@@ -188,7 +223,7 @@ public class Film {
                 ", langage='" + langage + '\'' +
                 ", releaseYear='" + releaseYear + '\'' +
                 ", realisateurs=" + realisateurs +
-                ", acteurs=" + acteurs +
+                ", acteurs=" + acteurFilms +
                 ", genres=" + genres +
                 ", country=" + country +
                 ", filming_locations=" + filming_locations +

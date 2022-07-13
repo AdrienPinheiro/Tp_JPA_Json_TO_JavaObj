@@ -2,24 +2,21 @@ package dal.Impl;
 
 import bo.Acteur;
 import dal.DALException;
-import dal.DAO;
-import dal.Settings;
+import dal.dao.ActeurDAO;
+import dal.settings.Settings;
 
-import javax.persistence.TypedQuery;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import java.util.List;
 
-public class ActeurImpl implements DAO<Acteur> {
+public class ActeurImpl implements ActeurDAO {
+
+    EntityManager em = Settings.getProperty();
+
     @Override
     public void insert(Acteur data) throws DALException {
-        try{
-            Settings.getProperty().getTransaction().begin();
-            Settings.getProperty().persist(data);
-            Settings.getProperty().getTransaction().commit();
-        } catch (DALException e) {
-            throw new DALException("Erreur lors de l'insertion d'un acteur");
-        }
+        em.getTransaction().begin();
+        em.persist(data);
+        em.getTransaction().commit();
     }
 
     @Override
@@ -32,28 +29,30 @@ public class ActeurImpl implements DAO<Acteur> {
 
     }
 
+    // getSingleResult() returns Acteur OU Exception (et pas null)
     @Override
     public Acteur selectById(long id) throws DALException {
-        Acteur acteur;
-        try{
-            TypedQuery<Acteur> selectById = Settings.getProperty().createQuery("SELECT a FROM Acteur a WHERE a.id=?", Acteur.class).setParameter(0, id);
-            acteur = selectById.getSingleResult();
-        } catch (DALException e){
-            throw new DALException("Problème lors de la récupération d'un acteur - id = "+id, e.getCause());
+        List<Acteur> acteurList = em.createQuery("SELECT a FROM Acteur a WHERE a.id=:id", Acteur.class).setParameter("id", id).getResultList();
+        if(!acteurList.isEmpty()){
+            return acteurList.get(0);
         }
-        return acteur;
+        return null;
     }
 
     @Override
     public List<Acteur> selectAll() throws DALException {
-        ResultSet rs;
-        List<Acteur> acteurList = new ArrayList<>();
-        try{
-            TypedQuery<Acteur> selectAll = Settings.getProperty().createQuery("SELECT a FROM Acteur a", Acteur.class);
-            acteurList = selectAll.getResultList();
-        } catch (DALException e) {
-            throw new DALException("Problème lors de la récupération de la liste d'acteur");
+        List<Acteur> acteurList = em.createQuery("SELECT a FROM Acteur a", Acteur.class).getResultList();
+        if(!acteurList.isEmpty()){
+            return acteurList;
         }
-        return acteurList;
+        return null;
+    }
+
+    public Acteur selectByImdb(String idJson) throws DALException {
+        List<Acteur> acteurList = em.createQuery("SELECT a FROM Acteur a WHERE a.identity=:idJson", Acteur.class).setParameter("idJson", idJson).getResultList();
+        if(!acteurList.isEmpty()){
+            return acteurList.get(0);
+        }
+        return null;
     }
 }

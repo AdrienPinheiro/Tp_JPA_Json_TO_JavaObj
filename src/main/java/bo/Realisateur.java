@@ -21,13 +21,24 @@ public class Realisateur {
     @Column(name = "url", nullable = false)
     private String url;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "film_realisateur",
-            joinColumns = @JoinColumn(name = "id_realisateur"),
-            inverseJoinColumns = @JoinColumn(name = "id_film"))
+    @JsonProperty("realisateurs")
+    @ManyToMany(mappedBy = "realisateurs", cascade = CascadeType.ALL)
     private Set<Film> films = new HashSet<>();
 
     public Realisateur() {
+    }
+
+    public Realisateur(String identity, String url, Set<Film> films) {
+        this.identity = identity;
+        this.url = url;
+        this.films = films;
+    }
+
+    public Realisateur(long id, String identity, String url, Set<Film> films) {
+        this.id = id;
+        this.identity = identity;
+        this.url = url;
+        this.films = films;
     }
 
     public long getId() {
@@ -54,7 +65,6 @@ public class Realisateur {
         this.url = url;
     }
 
-    @JsonProperty("film")
     public Set<Film> getFilms() {
         return films;
     }

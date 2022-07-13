@@ -2,24 +2,20 @@ package dal.Impl;
 
 import bo.Realisateur;
 import dal.DALException;
-import dal.DAO;
-import dal.Settings;
+import dal.dao.DAO;
+import dal.settings.Settings;
 
-import javax.persistence.TypedQuery;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class RealisateurImpl implements DAO<Realisateur> {
+    EntityManager em = Settings.getProperty();
+
     @Override
     public void insert(Realisateur data) throws DALException {
-        try{
-            Settings.getProperty().getTransaction().begin();
-            Settings.getProperty().persist(data);
-            Settings.getProperty().getTransaction().commit();
-        } catch (DALException e) {
-            throw new DALException("Erreur lors de l'insertion d'un réalisateur");
-        }
+        em.getTransaction().begin();
+        em.persist(data);
+        em.getTransaction().commit();
     }
 
     @Override
@@ -32,21 +28,22 @@ public class RealisateurImpl implements DAO<Realisateur> {
 
     }
 
+    // getSingleResult() returns Acteur OU Exception (et pas null)
     @Override
     public Realisateur selectById(long id) throws DALException {
+        List<Realisateur> realisateurList = em.createQuery("SELECT r FROM Realisateur r WHERE r.id=:id", Realisateur.class).setParameter("id", id).getResultList();
+        if(!realisateurList.isEmpty()){
+            return realisateurList.get(0);
+        }
         return null;
     }
 
     @Override
     public List<Realisateur> selectAll() throws DALException {
-        ResultSet rs;
-        List<Realisateur> realisateurList = new ArrayList<>();
-        try{
-            TypedQuery<Realisateur> selectAll = Settings.getProperty().createQuery("SELECT r FROM Realisateur r", Realisateur.class);
-            realisateurList = selectAll.getResultList();
-        } catch (DALException e) {
-            throw new DALException("Problème lors de la récupération de la liste de réalisateur");
+        List<Realisateur> realisateurList = em.createQuery("SELECT r FROM Realisateur r", Realisateur.class).getResultList();
+        if(!realisateurList.isEmpty()){
+            return realisateurList;
         }
-        return realisateurList;
+        return null;
     }
 }

@@ -2,32 +2,36 @@ package bll.manager;
 
 import bll.BLLException;
 import bo.Acteur;
+import bo.Film;
+import dal.dao.ActeurDAO;
 import dal.DALException;
-import dal.DAO;
-import dal.DAOFactory;
+import dal.dao.DAOFactory;
 
 import java.util.List;
+import java.util.Set;
 
 public class ActeurManager {
     private static volatile ActeurManager instance;
-    private static DAO<Acteur> impl;
+    private static ActeurDAO impl;
     private ActeurManager(){
         impl = DAOFactory.getAuteurDAO();
     }
-    public final static ActeurManager getInstance(){
-        if(ActeurManager.instance == null){
+    public static ActeurManager getInstance(){
+        if(instance == null){
             synchronized (ActeurManager.class){
-                if(ActeurManager.instance == null){
-                    ActeurManager.instance = new ActeurManager();
+                if(instance == null){
+                    instance = new ActeurManager();
                 }
             }
         }
-        return ActeurManager.instance;
+        return instance;
     }
     public void addActeur(Acteur acteur) throws BLLException{
         controlActeur(acteur);
         try{
-            impl.insert(acteur);
+            if(acteur.getIdImdb() != null && impl.selectByImdb(acteur.getIdImdb()) == null) {
+                impl.insert(acteur);
+            }
         } catch (DALException e){
             throw new BLLException("Erreur lors de l'ajout d'un acteur", e.getCause());
         }

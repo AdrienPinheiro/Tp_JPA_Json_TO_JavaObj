@@ -2,24 +2,20 @@ package dal.Impl;
 
 import bo.LieuTournage;
 import dal.DALException;
-import dal.DAO;
-import dal.Settings;
+import dal.dao.DAO;
+import dal.settings.Settings;
 
-import javax.persistence.TypedQuery;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class LieuTournageImpl implements DAO<LieuTournage> {
+    EntityManager em = Settings.getProperty();
+
     @Override
     public void insert(LieuTournage data) throws DALException {
-        try{
-            Settings.getProperty().getTransaction().begin();
-            Settings.getProperty().persist(data);
-            Settings.getProperty().getTransaction().commit();
-        } catch (DALException e) {
-            throw new DALException("Erreur lors de l'insertion d'un lieu de tournage");
-        }
+        em.getTransaction().begin();
+        em.persist(data);
+        em.getTransaction().commit();
     }
 
     @Override
@@ -32,21 +28,22 @@ public class LieuTournageImpl implements DAO<LieuTournage> {
 
     }
 
+    // getSingleResult() returns Acteur OU Exception (et pas null)
     @Override
     public LieuTournage selectById(long id) throws DALException {
+        List<LieuTournage> lieuTournageList = em.createQuery("SELECT lt FROM LieuTournage lt WHERE lt.id=:id", LieuTournage.class).setParameter("id", id).getResultList();
+        if(!lieuTournageList.isEmpty()){
+            return lieuTournageList.get(0);
+        }
         return null;
     }
 
     @Override
     public List<LieuTournage> selectAll() throws DALException {
-        ResultSet rs;
-        List<LieuTournage> lieuTournageList = new ArrayList<>();
-        try{
-            TypedQuery<LieuTournage> selectAll = Settings.getProperty().createQuery("SELECT lt FROM LieuTournage lt", LieuTournage.class);
-            lieuTournageList = selectAll.getResultList();
-        } catch (DALException e) {
-            throw new DALException("Problème lors de la récupération de la liste des lieux de tournage");
+        List<LieuTournage> lieuTournageList = em.createQuery("SELECT lt FROM LieuTournage lt", LieuTournage.class).getResultList();
+        if(!lieuTournageList.isEmpty()){
+            return lieuTournageList;
         }
-        return lieuTournageList;
+        return null;
     }
 }
