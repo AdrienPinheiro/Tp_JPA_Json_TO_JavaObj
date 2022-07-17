@@ -20,7 +20,7 @@ public class Pays {
     @JsonProperty("url")
     @Column(name = "url", nullable = false)
     private String url;
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "country")
     private Set<Film> films = new HashSet<>();
 
     public Pays() {

@@ -11,6 +11,11 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class JsonReader {
+    /**
+     * @return List<Acteur></Acteur>
+     * @throws IOException
+     * Read Json
+     */
     public static List<Acteur> JsonReaderFilm() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

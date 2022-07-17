@@ -73,6 +73,8 @@ public class Realisateur {
         this.films = films;
     }
 
+    public void addFilm(Film film){this.films.add(film);}
+
     @Override
     public String toString() {
         return "Realisateur{" +

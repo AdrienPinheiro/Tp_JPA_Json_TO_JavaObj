@@ -18,30 +18,28 @@ public class Role {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "id_film")
+    private Film film;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "film_role",
-            joinColumns = @JoinColumn(name = "id_role"),
-            inverseJoinColumns = @JoinColumn(name = "id_film"))
-    private Set<Film> filmsRole = new HashSet<>();
-
-    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
-    private Set<Acteur> acteurs = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "id_acteur")
+    private Acteur acteur;
 
     public Role() {
     }
 
-    public Role(String name, Set<Film> filmsRole, Set<Acteur> acteurs) {
+    public Role(String name, Film film, Acteur acteur) {
         this.name = name;
-        this.filmsRole = filmsRole;
-        this.acteurs = acteurs;
+        this.film = film;
+        this.acteur = acteur;
     }
 
-    public Role(long id, String name, Set<Film> filmsRole, Set<Acteur> acteurs) {
+    public Role(long id, String name, Film film, Acteur acteur) {
         this.id = id;
         this.name = name;
-        this.filmsRole = filmsRole;
-        this.acteurs = acteurs;
+        this.film = film;
+        this.acteur = acteur;
     }
 
     public long getId() {
@@ -61,20 +59,20 @@ public class Role {
     }
 
     @JsonProperty("film")
-    public Set<Film> getFilmsRole() {
-        return filmsRole;
+    public Film getFilm() {
+        return film;
     }
 
-    public void setFilmsRole(Set<Film> filmsRole) {
-        this.filmsRole = filmsRole;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
-    public Set<Acteur> getActeurs() {
-        return acteurs;
+    public Acteur getActeur() {
+        return acteur;
     }
 
-    public void setActeurs(Set<Acteur> acteurs) {
-        this.acteurs = acteurs;
+    public void setActeur(Acteur acteur) {
+        this.acteur = acteur;
     }
 
     @Override
@@ -82,8 +80,8 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", films=" + filmsRole +
-                ", acteurs=" + acteurs +
+                ", films=" + film +
+                ", acteurs=" + acteur +
                 '}';
     }
 }

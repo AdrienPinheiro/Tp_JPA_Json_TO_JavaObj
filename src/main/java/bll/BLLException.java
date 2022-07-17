@@ -1,5 +1,6 @@
 package bll;
 
+
 public class BLLException extends Exception {
     public BLLException() {
         super();

@@ -27,7 +27,7 @@ public class LieuTournage {
     @Column(name = "country", nullable = false)
     private String country;
 
-    @OneToMany(mappedBy = "filming_locations", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "filmingLocations")
     private Set<Film> films = new HashSet<>();
 
     public LieuTournage() {

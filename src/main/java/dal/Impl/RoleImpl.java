@@ -11,6 +11,11 @@ import java.util.List;
 public class RoleImpl implements DAO<Role> {
     EntityManager em = Settings.getProperty();
 
+    /**
+     * @param data
+     * @throws DALException
+     * Persist role on BDD
+     */
     @Override
     public void insert(Role data) throws DALException {
         em.getTransaction().begin();
@@ -28,7 +33,12 @@ public class RoleImpl implements DAO<Role> {
 
     }
 
-    // getSingleResult() returns Acteur OU Exception (et pas null)
+    /**
+     * @param id
+     * @return Role
+     * @throws DALException
+     * Take one role with id on BDD
+     */
     @Override
     public Role selectById(long id) throws DALException {
         List<Role> roleList = em.createQuery("SELECT r FROM Role r WHERE r.id=:id", Role.class).setParameter("id", id).getResultList();
@@ -38,6 +48,11 @@ public class RoleImpl implements DAO<Role> {
         return null;
     }
 
+    /**
+     * @return List<Role>
+     * @throws DALException
+     * Take all role on BDD
+     */
     @Override
     public List<Role> selectAll() throws DALException {
         List<Role> roleList = em.createQuery("SELECT r FROM Role r", Role.class).getResultList();

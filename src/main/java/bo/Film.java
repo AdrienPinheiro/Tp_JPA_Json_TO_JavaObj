@@ -16,7 +16,7 @@ public class Film {
 
     @JsonProperty("id")
     @Column(name = "id_imdb")
-    private String id_imdb;
+    private String idImdb;
 
     @JsonProperty("nom")
     @Column(name = "title")
@@ -38,17 +38,16 @@ public class Film {
     @Column(name = "release_year")
     private String releaseYear;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "film_realisateur",
             joinColumns = @JoinColumn(name = "id_film"),
             inverseJoinColumns = @JoinColumn(name = "id_realisateur"))
     private Set<Realisateur> realisateurs = new HashSet<>();
 
-    @ManyToMany(mappedBy = "filmsRole", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "film")
     private Set<Role> roles = new HashSet<>();
 
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "film_acteur",
             joinColumns = @JoinColumn(name = "id_film", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_acteur", referencedColumnName = "id"))
@@ -66,13 +65,19 @@ public class Film {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_tournage")
     @JsonProperty("lieuTournage")
-    private LieuTournage filming_locations;
+    private LieuTournage filmingLocations;
+
+    @ManyToMany
+    @JoinTable(name = "casting_principals",
+        joinColumns = @JoinColumn(name = "id_film", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "id_acteur", referencedColumnName = "id"))
+    private Set<Acteur> castingPrincipals = new HashSet<>();
 
     public Film() {
     }
 
-    public Film(String id_imdb, String title, String url, String description, String langage, String releaseYear, Set<Realisateur> realisateurs, Set<Role> roles, Set<Acteur> acteurFilms, List<String> genres, Pays country, LieuTournage filming_locations) {
-        this.id_imdb = id_imdb;
+    public Film(String idImdb, String title, String url, String description, String langage, String releaseYear, Set<Realisateur> realisateurs, Set<Role> roles, Set<Acteur> acteurFilms, List<String> genres, Pays country, LieuTournage filmingLocations, Set<Acteur> castingPrincipals) {
+        this.idImdb = idImdb;
         this.title = title;
         this.url = url;
         this.description = description;
@@ -83,12 +88,13 @@ public class Film {
         this.acteurFilms = acteurFilms;
         this.genres = genres;
         this.country = country;
-        this.filming_locations = filming_locations;
+        this.filmingLocations = filmingLocations;
+        this.castingPrincipals = castingPrincipals;
     }
 
-    public Film(long id, String id_imdb, String title, String url, String description, String langage, String releaseYear, Set<Realisateur> realisateurs, Set<Role> roles, Set<Acteur> acteurFilms, List<String> genres, Pays country, LieuTournage filming_locations) {
+    public Film(long id, String idImdb, String title, String url, String description, String langage, String releaseYear, Set<Realisateur> realisateurs, Set<Role> roles, Set<Acteur> acteurFilms, List<String> genres, Pays country, LieuTournage filmingLocations, Set<Acteur> castingPrincipals) {
         this.id = id;
-        this.id_imdb = id_imdb;
+        this.idImdb = idImdb;
         this.title = title;
         this.url = url;
         this.description = description;
@@ -99,7 +105,8 @@ public class Film {
         this.acteurFilms = acteurFilms;
         this.genres = genres;
         this.country = country;
-        this.filming_locations = filming_locations;
+        this.filmingLocations = filmingLocations;
+        this.castingPrincipals = castingPrincipals;
     }
 
     public long getId() {
@@ -110,12 +117,12 @@ public class Film {
         this.id = id;
     }
 
-    public String getId_imdb() {
-        return id_imdb;
+    public String getIdImdb() {
+        return idImdb;
     }
 
-    public void setId_imdb(String id_imdb) {
-        this.id_imdb = id_imdb;
+    public void setIdImdb(String idImdb) {
+        this.idImdb = idImdb;
     }
 
     public String getTitle() {
@@ -184,15 +191,6 @@ public class Film {
         this.country = country;
     }
 
-    @JsonProperty("lieuTournage")
-    public LieuTournage getFilming_locations() {
-        return filming_locations;
-    }
-
-    public void setFilming_locations(LieuTournage filming_locations) {
-        this.filming_locations = filming_locations;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -210,23 +208,48 @@ public class Film {
         this.acteurFilms = acteurFilms;
     }
 
+    public void addActeurFilm(Acteur acteurFilm){
+        this.acteurFilms.add(acteurFilm);
+    }
 
+    @JsonProperty("lieuTournage")
+    public LieuTournage getFilmingLocations() {
+        return filmingLocations;
+    }
+
+    public void setFilmingLocations(LieuTournage filmingLocations) {
+        this.filmingLocations = filmingLocations;
+    }
+
+    @JsonProperty("castingPrincipal")
+    public Set<Acteur> getCastingPrincipals() {
+        return castingPrincipals;
+    }
+
+    public void setCastingPrincipals(Set<Acteur> castingPrincipals) {
+        this.castingPrincipals = castingPrincipals;
+    }
+
+    public void addCastingPrincipals(Acteur acteur) {
+        this.castingPrincipals.add(acteur);
+    }
+
+    public void addRealisateur(Realisateur realisateur) {this.realisateurs.add(realisateur);}
 
     @Override
     public String toString() {
         return "Film{" +
-                "id=" + id +
-                ", id_imdb='" + id_imdb + '\'' +
-                ", title='" + title + '\'' +
-                ", url='" + url + '\'' +
-                ", description='" + description + '\'' +
-                ", langage='" + langage + '\'' +
-                ", releaseYear='" + releaseYear + '\'' +
-                ", realisateurs=" + realisateurs +
-                ", acteurs=" + acteurFilms +
-                ", genres=" + genres +
-                ", country=" + country +
-                ", filming_locations=" + filming_locations +
+                " id = " + id +
+                ", id_imdb = '" + idImdb + '\'' +
+                ", titre = '" + title + '\'' +
+                ", année de sortie = '" + releaseYear + '\'' +
+                ", pays d'origine = " + country +
+                ", lieu de tournage = " + filmingLocations +
+                ", genres = " + genres +
+                ", description = '" + description + '\'' +
+                ", langue = '" + langage + '\'' +
+                ", réalisateurs = " + realisateurs +
+                ", acteurs = " + acteurFilms +
                 '}';
     }
 }

@@ -2,13 +2,12 @@ package bll.manager;
 
 import bll.BLLException;
 import bo.Acteur;
-import bo.Film;
+
 import dal.dao.ActeurDAO;
 import dal.DALException;
 import dal.dao.DAOFactory;
 
 import java.util.List;
-import java.util.Set;
 
 public class ActeurManager {
     private static volatile ActeurManager instance;
@@ -26,10 +25,17 @@ public class ActeurManager {
         }
         return instance;
     }
+
+    /**
+     * @param acteur
+     * @throws BLLException
+     * Verification if acteur identity is not null and call selectByImdb is not null too
+     */
     public void addActeur(Acteur acteur) throws BLLException{
         controlActeur(acteur);
         try{
-            if(acteur.getIdImdb() != null && impl.selectByImdb(acteur.getIdImdb()) == null) {
+            //List<Acteur> listActeur = FilmManager.getInstance().getFilmsActeurs();
+            if(acteur.getIdentity() != null && impl.selectByImdb(acteur.getIdentity()) == null) {
                 impl.insert(acteur);
             }
         } catch (DALException e){
@@ -37,6 +43,12 @@ public class ActeurManager {
         }
     }
 
+    /**
+     * @param id
+     * @return Acteur
+     * @throws BLLException
+     * Try to call select one acteur by id method on ActeurImpl
+     */
     public Acteur getOneActeur(long id) throws BLLException {
         Acteur acteur;
         try{
@@ -47,6 +59,11 @@ public class ActeurManager {
         return acteur;
     }
 
+    /**
+     * @return List<Acteur>
+     * @throws BLLException
+     * Try to call select all acteur method on ActeurImpl
+     */
     public List<Acteur> getActeurs() throws BLLException{
         List<Acteur> acteurList;
         try{
@@ -57,11 +74,45 @@ public class ActeurManager {
         return acteurList;
     }
 
+    /**
+     * @param acteur
+     * @return Acteur
+     * @throws DALException
+     * Try to call method select acteur or create
+     */
+    public Acteur getOrCreateActeur(Acteur acteur) throws BLLException, DALException {
+        controlActeur(acteur);
+        Acteur acteurVerif = impl.selectByImdb(acteur.getIdImdb());
+        if(acteurVerif != null){
+            return acteurVerif;
+        }
+        impl.insert(acteur);
+        return acteur;
+    }
+
+    /**
+     * @param acteur
+     * @throws BLLException
+     * Verification if acteur params is not null
+     */
     public void controlActeur(Acteur acteur) throws BLLException{
         boolean valid = true;
         StringBuilder sb = new StringBuilder();
         if(acteur==null){
             throw new BLLException("Erreur : l'acteur est null");
         }
+    }
+
+    /**
+     * @param film
+     * @return List<Acteur>
+     * @throws DALException
+     * Try to get casting of film after verification if film is not null
+     */
+    public List<Acteur> getCasting(String film) throws DALException {
+        if(film != null){
+            return impl.castingFilm(film);
+        }
+        return null;
     }
 }

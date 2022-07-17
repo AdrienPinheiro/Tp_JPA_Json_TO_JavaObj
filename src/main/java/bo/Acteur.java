@@ -31,29 +31,29 @@ public class Acteur {
     @Column(name = "url")
     private String url;
 
-
-    @ManyToMany(mappedBy = "acteurFilms", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "acteurFilms")
     private Set<Film> films = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "acteur_role",
-            joinColumns = @JoinColumn(name = "id_acteur", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_role", referencedColumnName = "id"))
-    private Set<Role> roles = new java.util.LinkedHashSet<>();
+    @OneToMany(mappedBy = "acteur")
+    private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(mappedBy = "castingPrincipals")
+    private Set<Film> filmCastings = new HashSet<>();
 
     public Acteur() {
     }
 
-    public Acteur(String idImdb, String identity, Naissance naissance, String url, Set<Film> films, Set<Role> roles) {
+    public Acteur(String idImdb, String identity, Naissance naissance, String url, Set<Film> films, Set<Role> roles, Set<Film> filmCastings) {
         this.idImdb = idImdb;
         this.identity = identity;
         this.naissance = naissance;
         this.url = url;
         this.films = films;
         this.roles = roles;
+        this.filmCastings = filmCastings;
     }
 
-    public Acteur(long id, String idImdb, String identity, Naissance naissance, String url, Set<Film> films, Set<Role> roles) {
+    public Acteur(long id, String idImdb, String identity, Naissance naissance, String url, Set<Film> films, Set<Role> roles, Set<Film> filmCastings) {
         this.id = id;
         this.idImdb = idImdb;
         this.identity = identity;
@@ -61,6 +61,7 @@ public class Acteur {
         this.url = url;
         this.films = films;
         this.roles = roles;
+        this.filmCastings = filmCastings;
     }
 
     public long getId() {
@@ -120,6 +121,22 @@ public class Acteur {
         this.roles = roles;
     }
 
+    public void addFilm(Film film) {
+        this.films.add(film);
+    }
+
+    public Set<Film> getFilmCastings() {
+        return filmCastings;
+    }
+
+    public void setFilmCastings(Set<Film> filmCastings) {
+        this.filmCastings = filmCastings;
+    }
+
+    public void addFilmCasting(Film filmCasting){
+        this.filmCastings.add(filmCasting);
+    }
+
     @Override
     public String toString() {
         return "Acteur{" +
@@ -128,7 +145,6 @@ public class Acteur {
                 ", identity='" + identity + '\'' +
                 ", naissance=" + naissance +
                 ", url='" + url + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 }

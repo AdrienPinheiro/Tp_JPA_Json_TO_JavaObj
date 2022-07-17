@@ -4,6 +4,10 @@ import dal.DALException;
 
 import java.util.List;
 
+/**
+ * @param <T>
+ * All same call BDD method
+ */
 public interface DAO<T> {
     public void insert(T data) throws DALException;
     public void delete(T data) throws DALException;

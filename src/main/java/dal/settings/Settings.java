@@ -6,6 +6,11 @@ import javax.persistence.EntityManagerFactory;
 public class Settings {
     private static EntityManagerFactory emf;
     private static EntityManager em;
+
+    /**
+     * @return EntityManager
+     * Return one instance if they don't exist of EntityManager
+     */
     private static EntityManager loadDB(){
         if(emf == null){
             emf = javax.persistence.Persistence.createEntityManagerFactory("traitement-data");
@@ -17,6 +22,11 @@ public class Settings {
         }
         return em;
     }
+
+    /**
+     * @return EntityManager
+     * Return one instance of EntityManager
+     */
     public static EntityManager getProperty(){
         return loadDB();
     }

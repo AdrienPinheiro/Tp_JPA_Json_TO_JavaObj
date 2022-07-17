@@ -11,6 +11,11 @@ import java.util.List;
 public class PaysImpl implements DAO<Pays> {
     EntityManager em = Settings.getProperty();
 
+    /**
+     * @param data
+     * @throws DALException
+     * Persist country on BDD
+     */
     @Override
     public void insert(Pays data) throws DALException {
         em.getTransaction().begin();
@@ -28,6 +33,12 @@ public class PaysImpl implements DAO<Pays> {
 
     }
 
+    /**
+     * @param id
+     * @return Pays
+     * @throws DALException
+     * Take one country with id on BDD
+     */
     // getSingleResult() returns Acteur OU Exception (et pas null)
     @Override
     public Pays selectById(long id) throws DALException {
@@ -38,6 +49,11 @@ public class PaysImpl implements DAO<Pays> {
         return null;
     }
 
+    /**
+     * @return List<Pays>
+     * @throws DALException
+     * Take all country on BDD
+     */
     @Override
     public List<Pays> selectAll() throws DALException {
         List<Pays> paysList = em.createQuery("SELECT p FROM Pays p", Pays.class).getResultList();
