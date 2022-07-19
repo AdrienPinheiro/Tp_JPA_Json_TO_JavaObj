@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
+/**
+ * Role object
+ */
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -26,15 +27,31 @@ public class Role {
     @JoinColumn(name = "id_acteur")
     private Acteur acteur;
 
+    /**
+     * Role constructor simple
+     */
     public Role() {
     }
 
+    /**
+     * Role constructor without id
+     * @param name the role name
+     * @param film all film of role
+     * @param acteur all actor of role
+     */
     public Role(String name, Film film, Acteur acteur) {
         this.name = name;
         this.film = film;
         this.acteur = acteur;
     }
 
+    /**
+     * Role constructor with id
+     * @param id generate id with BDD
+     * @param name the role name
+     * @param film all film of role
+     * @param acteur all actor of role
+     */
     public Role(long id, String name, Film film, Acteur acteur) {
         this.id = id;
         this.name = name;

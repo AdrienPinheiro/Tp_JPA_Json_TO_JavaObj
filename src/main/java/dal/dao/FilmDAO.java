@@ -13,5 +13,5 @@ public interface FilmDAO extends DAO<Film>{
     public List<Film> selectActeurFilm(String identity) throws DALException;
     public List<Film> selectFilmBetweenYear(int startYear, int endYear) throws DALException;
     public List<Film> selectFilmTwoActeur(String firstActeur, String secondActeur) throws DALException;
-    public List<Film> selectFilmBetweenYearAndWithTwoActeur(int startYear, int endYear, String acteur) throws DALException;
+    public List<Film> selectFilmBetweenYearWithActeur(String startYear, String endYear, String acteur) throws DALException;
 }

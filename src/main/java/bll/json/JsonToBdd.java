@@ -1,6 +1,5 @@
 package bll.json;
 
-import bll.json.JsonReader;
 import bll.manager.ActeurManager;
 
 import bll.manager.FilmManager;
@@ -17,6 +16,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Build BDD method
+ */
 public class JsonToBdd {
     /**
      * @param args

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
+/**
+ * Naissance object
+ */
 @Embeddable
 public class Naissance {
     @JsonProperty("dateNaissance")

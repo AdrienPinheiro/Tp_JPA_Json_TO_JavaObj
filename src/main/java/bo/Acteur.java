@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Actor object
+ */
 @Entity
 @Table(name = "acteurs")
 public class Acteur {
@@ -40,9 +43,23 @@ public class Acteur {
     @ManyToMany(mappedBy = "castingPrincipals")
     private Set<Film> filmCastings = new HashSet<>();
 
+    /**
+     * Actor constructor simple
+     */
     public Acteur() {
+        super();
     }
 
+    /**
+     * Actor constructor without id
+     * @param idImdb the id of JSON
+     * @param identity the name of actor
+     * @param naissance the dateOfBirth and placeOfBirth of actor
+     * @param url the url of actor
+     * @param films all film actor
+     * @param roles all role actor
+     * @param filmCastings all actor casting principal
+     */
     public Acteur(String idImdb, String identity, Naissance naissance, String url, Set<Film> films, Set<Role> roles, Set<Film> filmCastings) {
         this.idImdb = idImdb;
         this.identity = identity;
@@ -53,6 +70,17 @@ public class Acteur {
         this.filmCastings = filmCastings;
     }
 
+    /**
+     * Actor constructor with BDD id
+     * @param id generate id with BDD
+     * @param idImdb the id of JSON
+     * @param identity the name of actor
+     * @param naissance the dateOfBirth and placeOfBirth of actor
+     * @param url the url of actor
+     * @param films all film actor
+     * @param roles all role actor
+     * @param filmCastings all actor casting principal
+     */
     public Acteur(long id, String idImdb, String identity, Naissance naissance, String url, Set<Film> films, Set<Role> roles, Set<Film> filmCastings) {
         this.id = id;
         this.idImdb = idImdb;

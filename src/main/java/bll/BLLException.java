@@ -1,6 +1,8 @@
 package bll;
 
-
+/**
+ * Exception for BLL error
+ */
 public class BLLException extends Exception {
     public BLLException() {
         super();

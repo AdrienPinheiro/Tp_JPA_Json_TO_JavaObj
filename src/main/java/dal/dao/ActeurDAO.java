@@ -11,4 +11,5 @@ import java.util.List;
 public interface ActeurDAO extends DAO<Acteur> {
     public Acteur selectByImdb(String idImdb) throws DALException;
     public List<Acteur> castingFilm(String title) throws DALException;
+    public List<Acteur> selectActeurFilm(String filmOne, String filmTwo) throws DALException;
 }

@@ -11,13 +11,16 @@ import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * All call BDD for actor object
+ */
 public class ActeurImpl implements ActeurDAO {
 
     EntityManager em = Settings.getProperty();
 
     /**
-     * @param acteur
      * Persist actor on BDD
+     * @param acteur actor object
      */
     @Override
     public void insert(Acteur acteur) {
@@ -37,9 +40,9 @@ public class ActeurImpl implements ActeurDAO {
     }
 
     /**
-     * @param id
-     * @return Acteur
      * Take actor with id on BDD
+     * @param id actor id
+     * @return Acteur object
      */
     @Override
     public Acteur selectById(long id) {
@@ -51,8 +54,8 @@ public class ActeurImpl implements ActeurDAO {
     }
 
     /**
-     * @return List<Acteur>
      * Take all actor on BDD
+     * @return List actor object
      */
     @Override
     public List<Acteur> selectAll() {
@@ -64,9 +67,9 @@ public class ActeurImpl implements ActeurDAO {
     }
 
     /**
-     * @param idJson
-     * @return Acteur
      * Select actor with id_imbd on BDD
+     * @param idJson actor JSON id
+     * @return Acteur object
      */
     @Override
     public Acteur selectByImdb(String idJson){
@@ -78,15 +81,30 @@ public class ActeurImpl implements ActeurDAO {
     }
 
     /**
-     * @param title
-     * @return List<Acteur>
      * Take all actors on casting of film on BDD
+     * @param title film title for search actor on this
+     * @return List actor object
      */
     @Override
     public List<Acteur> castingFilm(String title){
         try {
             Film films = em.createQuery("SELECT f FROM Film f WHERE f.title=:title", Film.class).setParameter("title", title).getSingleResult();
             return new ArrayList<>(films.getCastingPrincipals());
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
+    /**
+     * Tale all same actor on two different film on BDD
+     * @param filmOne
+     * @param filmTwo
+     * @return List actor object
+     */
+    @Override
+    public List<Acteur> selectActeurFilm(String filmOne, String filmTwo){
+        try {
+            return em.createQuery("SELECT a FROM Acteur a JOIN a.films f WHERE f.title=:filmOne AND a.id IN (SELECT a.id FROM Acteur a JOIN a.films f WHERE f.title=:filmTwo)").setParameter("filmOne", filmOne).setParameter("filmTwo", filmTwo).getResultList();
         } catch (NoResultException e){
             return null;
         }

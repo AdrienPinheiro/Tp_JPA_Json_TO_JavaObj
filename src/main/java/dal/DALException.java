@@ -1,5 +1,8 @@
 package dal;
 
+/**
+ * Exception for DAL error
+ */
 public class DALException extends Exception {
     public DALException() {
         super();

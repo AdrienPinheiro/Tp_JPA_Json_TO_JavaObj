@@ -7,8 +7,12 @@ import dal.dao.ActeurDAO;
 import dal.DALException;
 import dal.dao.DAOFactory;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
+/**
+ * Call with control parameters the Implementation dal
+ */
 public class ActeurManager {
     private static volatile ActeurManager instance;
     private static ActeurDAO impl;
@@ -27,9 +31,10 @@ public class ActeurManager {
     }
 
     /**
-     * @param acteur
+     * Verification if actor identity is not null and call selectByImdb is not null too
+     * @param acteur the actor object
      * @throws BLLException
-     * Verification if acteur identity is not null and call selectByImdb is not null too
+     * BllException error
      */
     public void addActeur(Acteur acteur) throws BLLException{
         controlActeur(acteur);
@@ -44,10 +49,11 @@ public class ActeurManager {
     }
 
     /**
-     * @param id
+     * Try to call select one acteur by id method on ActeurImpl
+     * @param id the actor id
      * @return Acteur
      * @throws BLLException
-     * Try to call select one acteur by id method on ActeurImpl
+     * BllException error
      */
     public Acteur getOneActeur(long id) throws BLLException {
         Acteur acteur;
@@ -60,9 +66,10 @@ public class ActeurManager {
     }
 
     /**
-     * @return List<Acteur>
-     * @throws BLLException
      * Try to call select all acteur method on ActeurImpl
+     * @return List object actor
+     * @throws BLLException
+     * BllException error
      */
     public List<Acteur> getActeurs() throws BLLException{
         List<Acteur> acteurList;
@@ -75,10 +82,11 @@ public class ActeurManager {
     }
 
     /**
-     * @param acteur
+     * Try to call method select acteur or create
+     * @param acteur actor object
      * @return Acteur
      * @throws DALException
-     * Try to call method select acteur or create
+     * BllException error
      */
     public Acteur getOrCreateActeur(Acteur acteur) throws BLLException, DALException {
         controlActeur(acteur);
@@ -91,9 +99,10 @@ public class ActeurManager {
     }
 
     /**
-     * @param acteur
-     * @throws BLLException
      * Verification if acteur params is not null
+     * @param acteur actor object
+     * @throws BLLException
+     * BLLException error
      */
     public void controlActeur(Acteur acteur) throws BLLException{
         boolean valid = true;
@@ -104,14 +113,30 @@ public class ActeurManager {
     }
 
     /**
-     * @param film
-     * @return List<Acteur>
-     * @throws DALException
      * Try to get casting of film after verification if film is not null
+     * @param film
+     * @return List actor object
+     * @throws DALException
+     * BLLException error
      */
     public List<Acteur> getCasting(String film) throws DALException {
         if(film != null){
             return impl.castingFilm(film);
+        }
+        return null;
+    }
+
+    /**
+     * Try to get all same actors present in two different film
+     * @param filmOne the name of first film
+     * @param filmTwo the name of second film
+     * @return List actor object
+     * @throws DALException
+     * DALException error
+     */
+    public List<Acteur> selectActeurFilm(String filmOne, String filmTwo) throws DALException {
+        if(filmOne != null && filmTwo != null){
+            return impl.selectActeurFilm(filmOne, filmTwo);
         }
         return null;
     }

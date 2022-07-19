@@ -8,6 +8,9 @@ import dal.dao.DAOFactory;
 
 import java.util.List;
 
+/**
+ * Call with control parameters the Implementation dal
+ */
 public class RoleManager {
     private static volatile RoleManager instance;
     private static DAO<Role> impl;
@@ -26,9 +29,10 @@ public class RoleManager {
     }
 
     /**
-     * @param role
-     * @throws BLLException
      * Try to call insert method on RoleImpl
+     * @param role role object
+     * @throws BLLException
+     * BLLException error
      */
     public void addRole(Role role) throws BLLException {
         controlRole(role);
@@ -40,10 +44,11 @@ public class RoleManager {
     }
 
     /**
-     * @param id
+     * Try to call select by id method on RoleImpl
+     * @param id role id
      * @return Role
      * @throws BLLException
-     * Try to call select by id method on RoleImpl
+     * BLLException error
      */
     public Role getOneRole(long id) throws BLLException {
         Role role;
@@ -56,9 +61,10 @@ public class RoleManager {
     }
 
     /**
-     * @return List<Role>
-     * @throws BLLException
      * Try to call select all role methods on RoleImpl
+     * @return List object role
+     * @throws BLLException
+     * BLLException error
      */
     public List<Role> getRoles() throws BLLException{
         List<Role> roleList;
@@ -71,9 +77,10 @@ public class RoleManager {
     }
 
     /**
-     * @param role
-     * @throws BLLException
      * Verification if Role is not null
+     * @param role object role
+     * @throws BLLException
+     * BLLException error
      */
     public void controlRole(Role role) throws BLLException{
         boolean valid = true;

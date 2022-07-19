@@ -8,39 +8,40 @@ import dal.settings.Settings;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+/**
+ * All call BDD for filming location object
+ */
 public class LieuTournageImpl implements DAO<LieuTournage> {
     EntityManager em = Settings.getProperty();
 
     /**
-     * @param data
-     * @throws DALException
      * Persist Filming location on BDD
+     * @param data filming location object
      */
     @Override
-    public void insert(LieuTournage data) throws DALException {
+    public void insert(LieuTournage data) {
         em.getTransaction().begin();
         em.persist(data);
         em.getTransaction().commit();
     }
 
     @Override
-    public void delete(LieuTournage data) throws DALException {
+    public void delete(LieuTournage data) {
 
     }
 
     @Override
-    public void update(LieuTournage data) throws DALException {
+    public void update(LieuTournage data) {
 
     }
 
     /**
-     * @param id
-     * @return LieuTournage
-     * @throws DALException
      * Take one filming location with id on BDD
+     * @param id filming location id
+     * @return LieuTournage object
      */
     @Override
-    public LieuTournage selectById(long id) throws DALException {
+    public LieuTournage selectById(long id) {
         List<LieuTournage> lieuTournageList = em.createQuery("SELECT lt FROM LieuTournage lt WHERE lt.id=:id", LieuTournage.class).setParameter("id", id).getResultList();
         if(!lieuTournageList.isEmpty()){
             return lieuTournageList.get(0);
@@ -49,12 +50,11 @@ public class LieuTournageImpl implements DAO<LieuTournage> {
     }
 
     /**
-     * @return List<LieuTournage>
-     * @throws DALException
      * Take all filming location on BDD
+     * @return List filming location object
      */
     @Override
-    public List<LieuTournage> selectAll() throws DALException {
+    public List<LieuTournage> selectAll() {
         List<LieuTournage> lieuTournageList = em.createQuery("SELECT lt FROM LieuTournage lt", LieuTournage.class).getResultList();
         if(!lieuTournageList.isEmpty()){
             return lieuTournageList;

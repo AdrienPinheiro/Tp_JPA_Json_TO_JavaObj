@@ -10,40 +10,40 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.List;
 
+/**
+ * All call BDD for realisator object
+ */
 public class RealisateurImpl implements RealisateurDAO {
     EntityManager em = Settings.getProperty();
 
     /**
-     * @param data
-     * @throws DALException
      * Persist realisator on BDD
+     * @param data realisator object
      */
     @Override
-    public void insert(Realisateur data) throws DALException {
+    public void insert(Realisateur data) {
         em.getTransaction().begin();
         em.persist(data);
         em.getTransaction().commit();
     }
 
     @Override
-    public void delete(Realisateur data) throws DALException {
+    public void delete(Realisateur data) {
 
     }
 
     @Override
-    public void update(Realisateur data) throws DALException {
+    public void update(Realisateur data) {
 
     }
 
     /**
-     * @param id
-     * @return Realisateur
-     * @throws DALException
      * Take one realisator with id on BDD
+     * @param id realisator id
+     * @return Realisateur object
      */
-    // getSingleResult() returns Acteur OU Exception (et pas null)
     @Override
-    public Realisateur selectById(long id) throws DALException {
+    public Realisateur selectById(long id) {
         List<Realisateur> realisateurList = em.createQuery("SELECT r FROM Realisateur r WHERE r.id=:id", Realisateur.class).setParameter("id", id).getResultList();
         if(!realisateurList.isEmpty()){
             return realisateurList.get(0);
@@ -52,12 +52,11 @@ public class RealisateurImpl implements RealisateurDAO {
     }
 
     /**
-     * @return List<Realisateur>
-     * @throws DALException
      * Take all realisator on BDD
+     * @return List realisator object
      */
     @Override
-    public List<Realisateur> selectAll() throws DALException {
+    public List<Realisateur> selectAll() {
         List<Realisateur> realisateurList = em.createQuery("SELECT r FROM Realisateur r", Realisateur.class).getResultList();
         if(!realisateurList.isEmpty()){
             return realisateurList;
@@ -66,13 +65,12 @@ public class RealisateurImpl implements RealisateurDAO {
     }
 
     /**
-     * @param identity
-     * @return Realisateur
-     * @throws DALException
      * Take one realisateur with identity on BDD
+     * @param identity realisator identity
+     * @return Realisateur object
      */
     @Override
-    public Realisateur selectByIdentity(String identity) throws DALException {
+    public Realisateur selectByIdentity(String identity) {
         try{
             return em.createQuery("SELECT r FROM Realisateur r WHERE r.identity=:identity", Realisateur.class).setParameter("identity", identity).getSingleResult();
         } catch (NoResultException e){

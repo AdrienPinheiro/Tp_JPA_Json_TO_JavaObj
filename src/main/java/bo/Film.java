@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.util.*;
 
+/**
+ * Film object
+ */
 @Entity
 @Table(name = "films")
 public class Film {
@@ -73,9 +76,28 @@ public class Film {
         inverseJoinColumns = @JoinColumn(name = "id_acteur", referencedColumnName = "id"))
     private Set<Acteur> castingPrincipals = new HashSet<>();
 
+    /**
+     * Film constructor simple
+     */
     public Film() {
     }
 
+    /**
+     * Film constructor without id
+     * @param idImdb the id JSON
+     * @param title the title film
+     * @param url the url film
+     * @param description the description film
+     * @param langage the language film
+     * @param releaseYear the release year film
+     * @param realisateurs all realisator film
+     * @param roles all role film
+     * @param acteurFilms all actor film
+     * @param genres all genre film
+     * @param country the country film
+     * @param filmingLocations the filmingLocations film
+     * @param castingPrincipals the castingPrincipals film
+     */
     public Film(String idImdb, String title, String url, String description, String langage, String releaseYear, Set<Realisateur> realisateurs, Set<Role> roles, Set<Acteur> acteurFilms, List<String> genres, Pays country, LieuTournage filmingLocations, Set<Acteur> castingPrincipals) {
         this.idImdb = idImdb;
         this.title = title;
@@ -92,6 +114,23 @@ public class Film {
         this.castingPrincipals = castingPrincipals;
     }
 
+    /**
+     * Film constructor without id
+     * @param id generate id with BDD
+     * @param idImdb the id JSON
+     * @param title the title film
+     * @param url the url film
+     * @param description the description film
+     * @param langage the language film
+     * @param releaseYear the release year film
+     * @param realisateurs all realisator film
+     * @param roles all role film
+     * @param acteurFilms all actor film
+     * @param genres all genre film
+     * @param country the country film
+     * @param filmingLocations the filmingLocations film
+     * @param castingPrincipals the castingPrincipals film
+     */
     public Film(long id, String idImdb, String title, String url, String description, String langage, String releaseYear, Set<Realisateur> realisateurs, Set<Role> roles, Set<Acteur> acteurFilms, List<String> genres, Pays country, LieuTournage filmingLocations, Set<Acteur> castingPrincipals) {
         this.id = id;
         this.idImdb = idImdb;

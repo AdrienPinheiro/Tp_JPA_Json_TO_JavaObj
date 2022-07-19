@@ -4,7 +4,7 @@ import bo.*;
 import dal.Impl.*;
 
 /**
- * Return a new instance of Impl
+ * Return a new instance of class Implement
  */
 public class DAOFactory {
     public static ActeurDAO getAuteurDAO(){

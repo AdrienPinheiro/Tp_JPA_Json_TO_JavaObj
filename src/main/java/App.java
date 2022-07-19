@@ -7,10 +7,17 @@ import dal.DALException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Application with system in interface for different sql call
+ */
 public class App {
 
     private static final Scanner scan = new Scanner(System.in);
 
+    /**
+     * The principal interface for call sql
+     * @param args List of arguments
+     */
     public static void main(String[] args) {
         FilmManager filmManager = FilmManager.getInstance();
         ActeurManager acteurManager = ActeurManager.getInstance();
@@ -20,7 +27,6 @@ public class App {
             choice = scan.nextInt();
             switch (choice) {
                 case 1 -> {
-                    // filmographie d'un artiste : Good
                     System.out.println("Quel artiste voulez-vous consulter ?");
                     scan.nextLine();
                     String acteur = scan.nextLine();
@@ -41,7 +47,6 @@ public class App {
                     }
                 }
                 case 2 -> {
-                    // casting d'un film : Good
                     System.out.println("Quel film voulez-vous voir ?");
                     scan.nextLine();
                     String film = scan.nextLine();
@@ -61,7 +66,6 @@ public class App {
                     }
                 }
                 case 3 -> {
-                    // Film entre deux années données : Good
                     System.out.println("Quel est l'année de départ ?");
                     int startYear = scan.nextInt();
                     System.out.println("Quel est l'année de fin ?");
@@ -82,7 +86,6 @@ public class App {
                     }
                 }
                 case 4 -> {
-                    //film commun a 2 acteur : Not Good
                     System.out.println("Premier acteur ?");
                     scan.nextLine();
                     String firstActeur = scan.nextLine();
@@ -104,18 +107,18 @@ public class App {
                     }
                 }
                 case 5 -> {
-                    // film entre 2 années + acteur actrice commun : Not Good
                     System.out.println("L'acteur que vous voulez retrouver dans le film ?");
-                    String acteur1 = scan.nextLine();
+                    scan.nextLine();
+                    String acteurWithYear = scan.nextLine();
                     System.out.println("Année de départ ?");
-                    int yearStart = scan.nextInt();
+                    String yearStart = scan.nextLine();
                     System.out.println("Année de fin ?");
-                    int yearEnd = scan.nextInt();
+                    String yearEnd = scan.nextLine();
                     List<Film> filmList = null;
                     try {
-                        filmList = filmManager.selectFilmBetweenYearAndWithTwoActeur(yearStart, yearEnd, acteur1);
+                        filmList = filmManager.selectFilmBetweenYearWithActeur(yearStart, yearEnd, acteurWithYear);
                         if (!filmList.isEmpty()) {
-                            System.out.println("Les films entre " + yearStart + " et " + yearEnd + " dont l'acteur / actrice " + acteur1 + " est présent sont :");
+                            System.out.println("Les films entre " + yearStart + " et " + yearEnd + " dont l'acteur / actrice " + acteurWithYear + " est présent sont :");
                             for (Film acteurfilm : filmList) {
                                 System.out.println(acteurfilm);
                             }
@@ -126,12 +129,36 @@ public class App {
                         throw new RuntimeException(e);
                     }
                 }
-                case 6 -> System.out.println("Aurevoir !");
+                case 6 -> {
+                    System.out.println("Premier film ?");
+                    scan.nextLine();
+                    String firstFilm = scan.nextLine();
+                    System.out.println("Deuxième film ?");
+                    String secondFilm = scan.nextLine();
+                    List<Acteur> filmActeurList = null;
+                    try{
+                        filmActeurList = acteurManager.selectActeurFilm(firstFilm, secondFilm);
+                        if(!filmActeurList.isEmpty()){
+                            System.out.println("Les acteurs communs aux deux films "+firstFilm+" et "+secondFilm+" sont :");
+                            for (Acteur acteurFilm : filmActeurList){
+                                System.out.println(acteurFilm);
+                            }
+                            break;
+                        }
+                        System.out.println("Impossible de trouver des films avec des acteurs communs");
+                    } catch (DALException e) {
+                        e.printStackTrace();
+                    }
+                }
+                case 7 -> System.out.println("Aurevoir !");
             }
-        } while(choice != 6);
+        } while(choice != 7);
         scan.close();
     }
 
+    /**
+     * The menu of interface
+     */
     private static void Menu(){
         System.out.println("--- Menu de recherche de film ---");
         System.out.println("1. Filmographie d'un acteur");
@@ -139,7 +166,8 @@ public class App {
         System.out.println("3. Films sortis entre 2 années");
         System.out.println("4. Films communs à 2 acteurs/actrices");
         System.out.println("5. Films sortis entre 2 années et qui ont un acteur/actrice commun au casting");
-        System.out.println("6. Sortir");
+        System.out.println("6. Acteurs communs à deux films données");
+        System.out.println("7. Sortir");
     }
 
 }

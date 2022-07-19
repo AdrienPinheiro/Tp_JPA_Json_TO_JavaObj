@@ -3,13 +3,16 @@ package dal.settings;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * Try to open database connection
+ */
 public class Settings {
     private static EntityManagerFactory emf;
     private static EntityManager em;
 
     /**
-     * @return EntityManager
      * Return one instance if they don't exist of EntityManager
+     * @return EntityManager
      */
     private static EntityManager loadDB(){
         if(emf == null){
@@ -24,8 +27,8 @@ public class Settings {
     }
 
     /**
-     * @return EntityManager
      * Return one instance of EntityManager
+     * @return EntityManager
      */
     public static EntityManager getProperty(){
         return loadDB();

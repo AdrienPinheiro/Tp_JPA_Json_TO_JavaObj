@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Realisator object
+ */
 @Entity
 @Table(name = "realisateurs")
 public class Realisateur {
@@ -25,15 +28,31 @@ public class Realisateur {
     @ManyToMany(mappedBy = "realisateurs", cascade = CascadeType.ALL)
     private Set<Film> films = new HashSet<>();
 
+    /**
+     * Realisator constructor simple
+     */
     public Realisateur() {
     }
 
+    /**
+     * Realisator constructor without id
+     * @param identity the realisator identity
+     * @param url the realisator url
+     * @param films all films of realisator
+     */
     public Realisateur(String identity, String url, Set<Film> films) {
         this.identity = identity;
         this.url = url;
         this.films = films;
     }
 
+    /**
+     * Realisator constructor with id
+     * @param id generate id with BDD
+     * @param identity the realisator identity
+     * @param url the realisator url
+     * @param films all films of realisator
+     */
     public Realisateur(long id, String identity, String url, Set<Film> films) {
         this.id = id;
         this.identity = identity;

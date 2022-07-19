@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"bll"},{"l":"bll.json"},{"l":"bll.manager"},{"l":"bo"},{"l":"dal"},{"l":"dal.dao"},{"l":"dal.Impl"},{"l":"dal.settings"}];updateSearchResults();

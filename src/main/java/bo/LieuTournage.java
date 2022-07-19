@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Filming location object
+ */
 @Entity
 @Table(name = "filming_locations")
 public class LieuTournage {
@@ -30,9 +33,19 @@ public class LieuTournage {
     @OneToMany(mappedBy = "filmingLocations")
     private Set<Film> films = new HashSet<>();
 
+    /**
+     * Filming location constructor simple
+     */
     public LieuTournage() {
     }
 
+    /**
+     * Filming location constructor without id
+     * @param city the city
+     * @param department the department
+     * @param country the country
+     * @param films all film of filming location
+     */
     public LieuTournage(String city, String department, String country, Set<Film> films) {
         this.city = city;
         this.department = department;
@@ -40,6 +53,14 @@ public class LieuTournage {
         this.films = films;
     }
 
+    /**
+     * Filming location constructor with id
+     * @param id generate id with BDD
+     * @param city the city
+     * @param department the department
+     * @param country the country
+     * @param films all film of filming location
+     */
     public LieuTournage(long id, String city, String department, String country, Set<Film> films) {
         this.id = id;
         this.city = city;

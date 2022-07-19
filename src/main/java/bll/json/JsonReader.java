@@ -10,11 +10,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
+/**
+ * Read Json method
+ */
 public class JsonReader {
     /**
      * @return List<Acteur></Acteur>
      * @throws IOException
-     * Read Json
+     * Read Json method
      */
     public static List<Acteur> JsonReaderFilm() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();

@@ -10,6 +10,9 @@ import dal.dao.RealisateurDAO;
 
 import java.util.List;
 
+/**
+ * Call with control parameters the Implementation dal
+ */
 public class RealisateurManager {
     private static volatile RealisateurManager instance;
     private static RealisateurDAO impl;
@@ -28,9 +31,10 @@ public class RealisateurManager {
     }
 
     /**
-     * @param acteur
-     * @throws BLLException
      * Try to call realisator method on RealisateurImpl
+     * @param realisateur realisator object
+     * @throws BLLException
+     * BLLException error
      */
     public void addRealisateur(Realisateur realisateur) throws BLLException {
         controlRealisateur(realisateur);
@@ -42,10 +46,11 @@ public class RealisateurManager {
     }
 
     /**
-     * @param id
+     * Try to call one realisator method on RealisateurImpl
+     * @param id realisator id
      * @return Realisateur
      * @throws BLLException
-     * Try to call one realisator method on RealisateurImpl
+     * BLLException error
      */
     public Realisateur getOneRealisateur(long id) throws BLLException {
         Realisateur realisateur;
@@ -58,9 +63,10 @@ public class RealisateurManager {
     }
 
     /**
-     * @return List<Realisateur>
-     * @throws BLLException
      * Try to call get all realisator method on RealisateurImpl
+     * @return List realisator object
+     * @throws BLLException
+     * BLLException error
      */
     public List<Realisateur> getRealiateurs() throws BLLException{
         List<Realisateur> realisateurList;
@@ -73,10 +79,11 @@ public class RealisateurManager {
     }
 
     /**
-     * @param realisateur
+     * Try to call get or create realisator method on RealisateurImpl
+     * @param realisateur realisator object
      * @return Realisateur
      * @throws DALException
-     * Try to call get or create realisator method on RealisateurImpl
+     * DALException error
      */
     public Realisateur getOrCreateRealisateur(Realisateur realisateur) throws DALException {
         Realisateur realisateurVerif = impl.selectByIdentity(realisateur.getIdentity());
@@ -88,9 +95,10 @@ public class RealisateurManager {
     }
 
     /**
-     * @param realisateur
-     * @throws BLLException
      * Verification if Realisator is not null
+     * @param realisateur realisator object
+     * @throws BLLException
+     * BLLException error
      */
     public void controlRealisateur(Realisateur realisateur) throws BLLException{
         boolean valid = true;

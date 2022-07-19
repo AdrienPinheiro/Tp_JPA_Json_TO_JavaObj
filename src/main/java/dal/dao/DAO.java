@@ -5,8 +5,8 @@ import dal.DALException;
 import java.util.List;
 
 /**
- * @param <T>
  * All same call BDD method
+ * @param <T> generic type
  */
 public interface DAO<T> {
     public void insert(T data) throws DALException;

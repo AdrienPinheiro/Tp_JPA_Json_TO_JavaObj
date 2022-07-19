@@ -8,40 +8,40 @@ import dal.settings.Settings;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+/**
+ * All call BDD for film object
+ */
 public class PaysImpl implements DAO<Pays> {
     EntityManager em = Settings.getProperty();
 
     /**
-     * @param data
-     * @throws DALException
      * Persist country on BDD
+     * @param data country object
      */
     @Override
-    public void insert(Pays data) throws DALException {
+    public void insert(Pays data) {
         em.getTransaction().begin();
         em.persist(data);
         em.getTransaction().commit();
     }
 
     @Override
-    public void delete(Pays data) throws DALException {
+    public void delete(Pays data) {
 
     }
 
     @Override
-    public void update(Pays data) throws DALException {
+    public void update(Pays data) {
 
     }
 
     /**
-     * @param id
-     * @return Pays
-     * @throws DALException
      * Take one country with id on BDD
+     * @param id country id
+     * @return Pays object
      */
-    // getSingleResult() returns Acteur OU Exception (et pas null)
     @Override
-    public Pays selectById(long id) throws DALException {
+    public Pays selectById(long id) {
         List<Pays> paysList = em.createQuery("SELECT p FROM Pays p WHERE p.id=:id", Pays.class).setParameter("id", id).getResultList();
         if(!paysList.isEmpty()){
             return paysList.get(0);
@@ -50,12 +50,11 @@ public class PaysImpl implements DAO<Pays> {
     }
 
     /**
-     * @return List<Pays>
-     * @throws DALException
      * Take all country on BDD
+     * @return List country object
      */
     @Override
-    public List<Pays> selectAll() throws DALException {
+    public List<Pays> selectAll(){
         List<Pays> paysList = em.createQuery("SELECT p FROM Pays p", Pays.class).getResultList();
         if(!paysList.isEmpty()){
             return paysList;
